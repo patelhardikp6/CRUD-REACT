@@ -18,7 +18,7 @@ const User = () => {
   const deleteUser = async(userId) => {
     await axios.delete(`http://localhost:8000/api/delete/${userId}`)
     .then((res) => {
-      setUsers((prevUser) => prevUser.filter((user) => user.id !== userId));
+      setUsers((prevUser) => prevUser.filter((user) => user._id !== userId));
       toast.success(res.data.msg, {position:"top-right"});
     }).catch((err) =>{
       console.log(err);
@@ -44,8 +44,8 @@ const User = () => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td className="actionBtn">
-                      <Link to={"/update"}>Edit</Link>
-                      {/* <button className="editBtn" onClick={}>Edit</button> */}
+                      {/* <Link to={"/update"}>Edit</Link> */}
+                      <button className="editBtn" onClick={`/update/${user._id}`}>Edit</button>
                       <button onClick={() => deleteUser(user._id)}>Delete</button>
                   </td>
               </tr>
